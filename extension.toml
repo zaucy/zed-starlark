@@ -1,0 +1,15 @@
+id = "starlark"
+name = "Starlark"
+description = "Starlark support"
+version = "0.0.1"
+schema_version = 1
+authors = []
+repository = "https://github.com/zaucy/zed-starlark"
+
+[language_servers.starpls]
+name = "Starpls"
+language = "Starlark"
+
+[grammars.starlark]
+repository = "https://github.com/tree-sitter-grammars/tree-sitter-starlark"
+commit = "b31a616aac5d05f927f3f9dd809789db7805b632"
