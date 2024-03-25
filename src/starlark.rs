@@ -7,7 +7,82 @@ struct StarlarkExtension {
 
 impl StarlarkExtension {
     fn language_server_binary_path(&mut self, config: zed::LanguageServerConfig) -> Result<String> {
-        Ok(String::from("C:/Users/zekew/.cargo/bin/starpls.exe"))
+        if let Some(path) = &self.cached_binary_path {
+            if fs::metadata(path).map_or(false, |stat| stat.is_file()) {
+                return Ok(path.clone());
+            }
+        }
+
+        zed::set_language_server_installation_status(
+            &config.name,
+            &zed::LanguageServerInstallationStatus::CheckingForUpdate,
+        );
+        let (platform, arch) = zed::current_platform();
+        let release = zed::latest_github_release(
+            // temporary until https://github.com/withered-magic/starpls/issues/88 is closed and released
+            if platform == zed::Os::Windows {
+                "zaucy/starpls"
+            } else {
+                "withered-magic/starpls"
+            },
+            zed::GithubReleaseOptions {
+                require_assets: true,
+                pre_release: false,
+            },
+        )?;
+
+        let exe_suffix = match platform {
+            zed::Os::Windows => ".exe",
+            _ => "",
+        };
+        let asset_name = format!(
+            "starpls-{arch}-{os}{exe_suffix}",
+            arch = match arch {
+                zed::Architecture::Aarch64 => "arm64",
+                zed::Architecture::X86 => "x86",
+                zed::Architecture::X8664 => "amd64",
+            },
+            os = match platform {
+                zed::Os::Mac => "darwin",
+                zed::Os::Linux => "linux",
+                zed::Os::Windows => "windows",
+            },
+        );
+
+        let asset = release
+            .assets
+            .iter()
+            .find(|asset| asset.name == asset_name)
+            .ok_or_else(|| format!("no asset found matching {:?}", asset_name))?;
+
+        let version_dir = format!("starpls-{}", release.version);
+        let binary_path = format!("{version_dir}/starpls{exe_suffix}");
+
+        if !fs::metadata(&binary_path).map_or(false, |stat| stat.is_file()) {
+            zed::set_language_server_installation_status(
+                &config.name,
+                &zed::LanguageServerInstallationStatus::Downloading,
+            );
+
+            zed::download_file(
+                &asset.download_url,
+                &version_dir,
+                zed::DownloadedFileType::GzipTar,
+            )
+            .map_err(|e| format!("failed to download file: {e}"))?;
+
+            let entries =
+                fs::read_dir(".").map_err(|e| format!("failed to list working directory {e}"))?;
+            for entry in entries {
+                let entry = entry.map_err(|e| format!("failed to load directory entry {e}"))?;
+                if entry.file_name().to_str() != Some(&version_dir) {
+                    fs::remove_dir_all(&entry.path()).ok();
+                }
+            }
+        }
+
+        self.cached_binary_path = Some(binary_path.clone());
+        Ok(binary_path)
     }
 }
 
