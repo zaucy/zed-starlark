@@ -36,10 +36,10 @@ impl StarlarkExtension {
             _ => "",
         };
         let asset_name = format!(
-            "starpls-{arch}-{os}{exe_suffix}",
+            "starpls-{os}-{arch}{exe_suffix}",
             arch = match arch {
                 zed::Architecture::Aarch64 => "arm64",
-                zed::Architecture::X86 => "x86",
+                zed::Architecture::X86 => "x86", // not supported
                 zed::Architecture::X8664 => "amd64",
             },
             os = match platform {
@@ -66,19 +66,10 @@ impl StarlarkExtension {
 
             zed::download_file(
                 &asset.download_url,
-                &version_dir,
-                zed::DownloadedFileType::GzipTar,
+                &binary_path,
+                zed::DownloadedFileType::Uncompressed,
             )
             .map_err(|e| format!("failed to download file: {e}"))?;
-
-            let entries =
-                fs::read_dir(".").map_err(|e| format!("failed to list working directory {e}"))?;
-            for entry in entries {
-                let entry = entry.map_err(|e| format!("failed to load directory entry {e}"))?;
-                if entry.file_name().to_str() != Some(&version_dir) {
-                    fs::remove_dir_all(&entry.path()).ok();
-                }
-            }
         }
 
         self.cached_binary_path = Some(binary_path.clone());
