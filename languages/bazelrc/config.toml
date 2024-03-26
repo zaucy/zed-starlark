@@ -1,0 +1,5 @@
+name = "bazelrc"
+grammar = "bazelrc"
+path_suffixes = ["bazelrc"]
+line_comments = ["# "]
+brackets = []
