@@ -1,7 +1,7 @@
 id = "starlark"
 name = "Starlark"
 description = "Starlark support"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = []
 repository = "https://github.com/zaucy/zed-starlark"

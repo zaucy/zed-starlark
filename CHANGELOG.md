@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.1 - 2024-03-31
+#### Miscellaneous Chores
+- build script to maintaine extension version - (6df9990) - zaucy
+
+- - -
+
 ## 0.1.0 - 2024-03-31
 #### Bug Fixes
 - create version dir - (d41bdcf) - zaucy
