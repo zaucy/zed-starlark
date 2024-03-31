@@ -59,6 +59,8 @@ impl StarlarkExtension {
                 &zed::LanguageServerInstallationStatus::Downloading,
             );
 
+            _ = fs::create_dir(version_dir);
+
             zed::download_file(
                 &asset.download_url,
                 &binary_path,
