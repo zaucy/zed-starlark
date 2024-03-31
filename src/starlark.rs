@@ -19,12 +19,7 @@ impl StarlarkExtension {
         );
         let (platform, arch) = zed::current_platform();
         let release = zed::latest_github_release(
-            // temporary until https://github.com/withered-magic/starpls/issues/88 is closed and released
-            if platform == zed::Os::Windows {
-                "zaucy/starpls"
-            } else {
-                "withered-magic/starpls"
-            },
+            "withered-magic/starpls",
             zed::GithubReleaseOptions {
                 require_assets: true,
                 pre_release: false,
