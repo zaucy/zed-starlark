@@ -1,0 +1,30 @@
+from_latest_tag = false
+ignore_merge_commits = true
+generate_mono_repository_global_tag = true
+branch_whitelist = ["main"]
+pre_bump_hooks = [
+    "cargo test",
+    "cargo clippy",
+    "cargo fmt --all",
+    "cargo set-version {{version}}",
+    "cargo build --release",
+]
+post_bump_hooks = [
+    "git push",
+    "git push origin {{version}}",
+    "gh release create {{version}} --verify-tag",
+]
+pre_package_bump_hooks = []
+post_package_bump_hooks = []
+
+[git_hooks]
+
+[commit_types]
+
+[changelog]
+path = "CHANGELOG.md"
+authors = [{ signature = "Ezekiel Warren", username = "zaucy" }]
+
+[bump_profiles]
+
+[packages]
