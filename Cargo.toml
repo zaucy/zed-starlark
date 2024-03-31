@@ -11,3 +11,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 zed_extension_api = "0.0.4"
+
+[build-dependencies]
+toml_edit = "0.22.9"
