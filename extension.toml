@@ -9,6 +9,7 @@ repository = "https://github.com/zaucy/zed-starlark"
 [language_servers.starpls]
 name = "Starpls"
 language = "Starlark"
+languages = ["Starlark"]
 
 [grammars.starlark]
 repository = "https://github.com/tree-sitter-grammars/tree-sitter-starlark"
