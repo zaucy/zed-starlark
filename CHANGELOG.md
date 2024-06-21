@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.2 - 2024-06-21
+#### Bug Fixes
+- recognize .bzlmod as starlark (#1) - (ebece79) - Erik Kerber
+#### Miscellaneous Chores
+- update - (f4e140f) - zaucy
+- update to latest extension API, misc. fixes (#2) - (831e362) - Alex Kirszenberg
+- add author - (1409cb5) - zaucy
+- add readme - (8918035) - zaucy
+
+- - -
+
 ## 0.1.1 - 2024-03-31
 #### Miscellaneous Chores
 - build script to maintaine extension version - (6df9990) - zaucy
