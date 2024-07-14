@@ -1,11 +1,11 @@
 use std::fs;
 use zed_extension_api::{self as zed, Result};
 
-pub struct StarPls {
+pub struct Starpls {
     cached_binary_path: Option<String>,
 }
 
-impl StarPls {
+impl Starpls {
     pub fn new() -> Self {
         Self {
             cached_binary_path: None,

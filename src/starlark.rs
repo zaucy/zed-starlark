@@ -1,10 +1,10 @@
-use starpls::StarPls;
+use starpls::Starpls;
 use zed_extension_api::{self as zed, Result};
 
 mod starpls;
 
 struct StarlarkExtension {
-    starpls: Option<StarPls>,
+    starpls: Option<Starpls>,
 }
 
 impl zed::Extension for StarlarkExtension {
@@ -19,7 +19,7 @@ impl zed::Extension for StarlarkExtension {
     ) -> Result<zed::Command> {
         match language_server_id.as_ref() {
             "starpls" => {
-                let starpls = self.starpls.get_or_insert_with(|| StarPls::new());
+                let starpls = self.starpls.get_or_insert_with(|| Starpls::new());
                 Ok(zed::Command {
                     command: starpls.language_server_binary_path(language_server_id)?,
                     args: vec![],
