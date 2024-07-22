@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.2.0 - 2024-07-22
+#### Features
+- Include support for buck2 (#4) - (b146875) - Rashid Almheiri
+#### Miscellaneous Chores
+- add publish script - (1c13aca) - zaucy
+
+- - -
+
 ## 0.1.2 - 2024-06-21
 #### Bug Fixes
 - recognize .bzlmod as starlark (#1) - (ebece79) - Erik Kerber
