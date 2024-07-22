@@ -1,6 +1,6 @@
 name = "Starlark"
 grammar = "starlark"
-path_suffixes = ["star", "bzl", "bazel", "bzlmod", "WORKSPACE", "BUILD"]
+path_suffixes = ["star", "bzl", "bxl", "bazel", "bzlmod", "WORKSPACE", "BUILD", "PACKAGE", "BUCK"]
 line_comments = ["# "]
 autoclose_before = ";:.,=}])>"
 brackets = [
