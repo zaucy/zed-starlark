@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.3.0 - 2025-05-19
+#### Features
+- support configuring starpls arguments (#9) - (02f808d) - Sahin Yort
+
+- - -
+
 ## 0.2.0 - 2024-07-22
 #### Features
 - Include support for buck2 (#4) - (b146875) - Rashid Almheiri
