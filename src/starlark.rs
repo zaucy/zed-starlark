@@ -43,6 +43,17 @@ impl zed::Extension for StarlarkExtension {
                     env: Default::default(),
                 })
             }
+            "tilt" => {
+                let path = worktree.which("tilt").ok_or_else(|| {
+                    "`tilt` must be installed. The LSP is bundled with the tilt cli.".to_string()
+                })?;
+
+                Ok(zed::Command {
+                    command: path,
+                    args: vec!["lsp".to_string(), "start".to_string()],
+                    env: Default::default(),
+                })
+            }
             language_server_id => Err(format!("unknown language server: {language_server_id}")),
         }
     }
