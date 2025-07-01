@@ -1,47 +1,9 @@
-[
-  (list)
-  (dictionary)
-  (set)
+(_ "[" "]" @end) @indent
+(_ "{" "}" @end) @indent
+(_ "(" ")" @end) @indent
 
-  (for_statement)
-  (if_statement)
-  (while_statement)
-  (with_statement)
-
-  (parenthesized_expression)
-  (dictionary_comprehension)
-  (list_comprehension)
-  (set_comprehension)
-
-  (tuple_pattern)
-  (list_pattern)
-  (binary_operator)
-
-  (lambda)
-  (function_definition)
-] @indent
-
-(if_statement
-  condition: (parenthesized_expression) @aligned_indent
-  (#set! "delimiter" "()")
-)
-((ERROR "(" . (_)) @aligned_indent
- (#set! "delimiter" "()"))
-((argument_list) @aligned_indent
- (#set! "delimiter" "()"))
-((argument_list) @aligned_indent
- (#set! "delimiter" "()"))
-((parameters) @aligned_indent
- (#set! "delimiter" "()"))
-((tuple) @aligned_indent
- (#set! "delimiter" "()"))
-
-[
-  ")"
-  "]"
-  "}"
-  (elif_clause)
-  (else_clause)
-] @branch
-
-(string) @auto
+(function_definition) @start.def
+(if_statement) @start.if
+(for_statement) @start.for
+(elif_clause) @start.elif
+(else_clause) @start.else
