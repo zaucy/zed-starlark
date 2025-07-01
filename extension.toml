@@ -16,6 +16,11 @@ name = "Buck2 LSP"
 language = "Starlark"
 languages = ["Starlark"]
 
+[language_servers.tilt]
+name = "Tilt LSP"
+language = "Starlark"
+languages = ["Starlark"]
+
 [grammars.starlark]
 repository = "https://github.com/tree-sitter-grammars/tree-sitter-starlark"
 commit = "b31a616aac5d05f927f3f9dd809789db7805b632"

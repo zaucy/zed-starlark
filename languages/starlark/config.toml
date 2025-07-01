@@ -10,6 +10,9 @@ path_suffixes = [
     "BUILD",
     "PACKAGE",
     "BUCK",
+    "Tiltfile",
+    ".tiltfile",
+    ".tilt",
 ]
 line_comments = ["# "]
 autoclose_before = ";:.,=}])>"
