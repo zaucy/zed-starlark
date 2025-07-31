@@ -1,4 +1,4 @@
-name: Flake Validation
+name: Cargo Build & Test
 
 on:
     pull_request:
