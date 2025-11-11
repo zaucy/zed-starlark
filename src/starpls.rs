@@ -6,9 +6,9 @@ pub struct Starpls {
 }
 
 impl Starpls {
-    pub fn new() -> Self {
+    pub fn new(binary_path: Option<String>) -> Self {
         Self {
-            cached_binary_path: None,
+            cached_binary_path: binary_path,
         }
     }
 
