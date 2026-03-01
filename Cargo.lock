@@ -796,7 +796,7 @@ dependencies = [
 
 [[package]]
 name = "zed_starlark"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "toml_edit",
  "zed_extension_api",

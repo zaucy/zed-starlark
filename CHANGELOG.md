@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.4.1 - 2026-03-01
+#### Bug Fixes
+- be more specific about bazel suffix otherwise zed doesn't detect the file extension - (048d2df) - zaucy
+#### Miscellaneous Chores
+- update zed extension api dep - (6946c23) - zaucy
+
+- - -
+
 ## 0.4.0 - 2026-03-01
 #### Bug Fixes
 - include `.` in suffix filetype checks - (d11a194) - zaucy
