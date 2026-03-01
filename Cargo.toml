@@ -10,7 +10,7 @@ path = "src/starlark.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-zed_extension_api = "0.0.6"
+zed_extension_api = "0.7.0"
 
 [build-dependencies]
-toml_edit = "0.22.9"
+toml_edit = "0.25.3"
