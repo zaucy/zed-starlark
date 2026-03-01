@@ -12,7 +12,8 @@ git checkout $version;
 cd ...;
 git add -A;
 git checkout -b $"chore/update-starlark-($version)";
-git commit -m $"Update starlark extension to ($version)";
+# zed maintainers prefer this title
+git commit -m $"Update starlark to v($version)";
 gh repo set-default zed-industries/extensions;
 gh pr create --fill;
 gh pr view --web;
