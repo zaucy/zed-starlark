@@ -46,7 +46,9 @@ impl Starpls {
                 (zed::Os::Linux, zed::Architecture::Aarch64) => "aarch64",
                 (_, zed::Architecture::X8664) => "amd64",
                 (zed::Os::Windows, zed::Architecture::Aarch64) => {
-                    return Err(format!("Unsupported platform/architecture combination: Windows ARM64"));
+                    return Err(format!(
+                        "Unsupported platform/architecture combination: Windows ARM64"
+                    ));
                 }
                 (_, zed::Architecture::X86) => {
                     return Err(format!("Unsupported architecture: x86"));
@@ -100,17 +102,52 @@ mod tests {
     fn test_supported_architectures() {
         let test_cases = vec![
             // Supported combinations
-            (zed::Os::Mac, zed::Architecture::Aarch64, Ok("starpls-darwin-arm64")),
-            (zed::Os::Mac, zed::Architecture::X8664, Ok("starpls-darwin-amd64")),
-            (zed::Os::Linux, zed::Architecture::Aarch64, Ok("starpls-linux-aarch64")),
-            (zed::Os::Linux, zed::Architecture::X8664, Ok("starpls-linux-amd64")),
-            (zed::Os::Windows, zed::Architecture::X8664, Ok("starpls-windows-amd64.exe")),
-            
+            (
+                zed::Os::Mac,
+                zed::Architecture::Aarch64,
+                Ok("starpls-darwin-arm64"),
+            ),
+            (
+                zed::Os::Mac,
+                zed::Architecture::X8664,
+                Ok("starpls-darwin-amd64"),
+            ),
+            (
+                zed::Os::Linux,
+                zed::Architecture::Aarch64,
+                Ok("starpls-linux-aarch64"),
+            ),
+            (
+                zed::Os::Linux,
+                zed::Architecture::X8664,
+                Ok("starpls-linux-amd64"),
+            ),
+            (
+                zed::Os::Windows,
+                zed::Architecture::X8664,
+                Ok("starpls-windows-amd64.exe"),
+            ),
             // Unsupported combinations
-            (zed::Os::Mac, zed::Architecture::X86, Err("Unsupported architecture: x86")),
-            (zed::Os::Linux, zed::Architecture::X86, Err("Unsupported architecture: x86")),
-            (zed::Os::Windows, zed::Architecture::X86, Err("Unsupported architecture: x86")),
-            (zed::Os::Windows, zed::Architecture::Aarch64, Err("Unsupported platform/architecture combination: Windows ARM64"))
+            (
+                zed::Os::Mac,
+                zed::Architecture::X86,
+                Err("Unsupported architecture: x86"),
+            ),
+            (
+                zed::Os::Linux,
+                zed::Architecture::X86,
+                Err("Unsupported architecture: x86"),
+            ),
+            (
+                zed::Os::Windows,
+                zed::Architecture::X86,
+                Err("Unsupported architecture: x86"),
+            ),
+            (
+                zed::Os::Windows,
+                zed::Architecture::Aarch64,
+                Err("Unsupported platform/architecture combination: Windows ARM64"),
+            ),
         ];
 
         for (platform, arch, expected) in test_cases {
@@ -127,7 +164,9 @@ mod tests {
                         (zed::Os::Linux, zed::Architecture::Aarch64) => "aarch64",
                         (_, zed::Architecture::X8664) => "amd64",
                         (zed::Os::Windows, zed::Architecture::Aarch64) => {
-                            return Err(format!("Unsupported platform/architecture combination: Windows ARM64"));
+                            return Err(format!(
+                                "Unsupported platform/architecture combination: Windows ARM64"
+                            ));
                         }
                         (_, zed::Architecture::X86) => {
                             return Err(format!("Unsupported architecture: x86"));
@@ -144,20 +183,30 @@ mod tests {
 
             match (result, expected) {
                 (Ok(name), Ok(expected_name)) => {
-                    assert_eq!(name, expected_name, 
-                        "Platform: {:?}, Arch: {:?}", platform, arch);
+                    assert_eq!(
+                        name, expected_name,
+                        "Platform: {:?}, Arch: {:?}",
+                        platform, arch
+                    );
                 }
                 (Err(msg), Err(expected_msg)) => {
-                    assert_eq!(msg, expected_msg,
-                        "Platform: {:?}, Arch: {:?}", platform, arch);
+                    assert_eq!(
+                        msg, expected_msg,
+                        "Platform: {:?}, Arch: {:?}",
+                        platform, arch
+                    );
                 }
                 (Ok(name), Err(expected_msg)) => {
-                    panic!("Expected error '{}' but got success: '{}' for Platform: {:?}, Arch: {:?}",
-                        expected_msg, name, platform, arch);
+                    panic!(
+                        "Expected error '{}' but got success: '{}' for Platform: {:?}, Arch: {:?}",
+                        expected_msg, name, platform, arch
+                    );
                 }
                 (Err(msg), Ok(expected_name)) => {
-                    panic!("Expected success '{}' but got error: '{}' for Platform: {:?}, Arch: {:?}",
-                        expected_name, msg, platform, arch);
+                    panic!(
+                        "Expected success '{}' but got error: '{}' for Platform: {:?}, Arch: {:?}",
+                        expected_name, msg, platform, arch
+                    );
                 }
             }
         }
@@ -183,7 +232,7 @@ mod tests {
         ];
 
         let mut generated_assets = Vec::new();
-        
+
         for (platform, arch) in supported_combinations {
             let exe_suffix = match platform {
                 zed::Os::Windows => ".exe",
@@ -196,8 +245,10 @@ mod tests {
                     (zed::Os::Mac, zed::Architecture::Aarch64) => "arm64",
                     (zed::Os::Linux, zed::Architecture::Aarch64) => "aarch64",
                     (_, zed::Architecture::X8664) => "amd64",
-                    (zed::Os::Windows, zed::Architecture::Aarch64) => panic!("Windows ARM64 should not be in supported combinations"),
-                    (_, zed::Architecture::X86) => panic!("X86 should not be in supported combinations"),
+                    (zed::Os::Windows, zed::Architecture::Aarch64) =>
+                        panic!("Windows ARM64 should not be in supported combinations"),
+                    (_, zed::Architecture::X86) =>
+                        panic!("X86 should not be in supported combinations"),
                 },
                 os = match platform {
                     zed::Os::Mac => "darwin",
@@ -205,7 +256,7 @@ mod tests {
                     zed::Os::Windows => "windows",
                 },
             );
-            
+
             generated_assets.push(asset_name);
         }
 
@@ -213,7 +264,7 @@ mod tests {
         for asset in &release_assets {
             assert!(
                 generated_assets.contains(&asset.to_string()),
-                "Release asset '{}' is not generated by any supported combination", 
+                "Release asset '{}' is not generated by any supported combination",
                 asset
             );
         }

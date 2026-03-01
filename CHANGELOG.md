@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.4.0 - 2026-03-01
+#### Bug Fixes
+- include `.` in suffix filetype checks - (d11a194) - zaucy
+#### Features
+- allow overriding LSP path and arguments (#16) - (adf99cf) - Zsolt Dollenstein
+- adding workflow, architecture lookup fix and basic tests - (b09b67c) - Rory Chatterton
+- use zed's python tree-sitter queries as base (#12) - (7dfde32) - Alejandro Fernández Gómez
+- add support for tilt LSP (#11) - (17c5769) - Alejandro Fernández Gómez
+
+- - -
+
 ## 0.3.0 - 2025-05-19
 #### Features
 - support configuring starpls arguments (#9) - (02f808d) - Sahin Yort
