@@ -1,12 +1,14 @@
 name = "Starlark"
 grammar = "starlark"
 path_suffixes = [
-    ".star",
-    ".bzl",
-    ".bxl",
-    ".bazel",
-    ".bzlmod",
+    "star",
+    "bzl",
+    "bxl",
+    "REPO.bazel",
+    "BUILD.bazel",
+    "MODULE.bazel",
     "WORKSPACE",
+    "WORKSPACE.bzlmod",
     "BUILD",
     "PACKAGE",
     "BUCK",
