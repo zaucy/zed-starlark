@@ -32,3 +32,19 @@ To use tilt:
   }
 }
 ```
+
+You can override the path to the LSP binary and its arguments by adding a `binary`
+section to your LSP settings (this works for all of `starpls`, `buck2-lsp`, and `tilt`):
+
+```json
+{
+  "lsp": {
+    "starpls": {
+      "binary": {
+        "path": "/path/to/starpls",
+        "arguments": ["server", "--experimental_enable_label_completions"]
+      }
+    }
+  }
+}
+```

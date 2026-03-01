@@ -26,7 +26,12 @@ impl zed::Extension for StarlarkExtension {
                     .as_ref()
                     .and_then(|binary_settings| binary_settings.arguments.clone())
                     .unwrap_or_else(|| vec![]);
-                let starpls = self.starpls.get_or_insert_with(|| Starpls::new());
+                let binary_path = binary_settings
+                    .as_ref()
+                    .and_then(|settings| settings.path.clone());
+                let starpls = self
+                    .starpls
+                    .get_or_insert_with(|| Starpls::new(binary_path));
                 Ok(zed::Command {
                     command: starpls.language_server_binary_path(language_server_id)?,
                     args: binary_args,
@@ -34,23 +39,48 @@ impl zed::Extension for StarlarkExtension {
                 })
             }
             "buck2-lsp" => {
-                let path = worktree.which("buck2").ok_or_else(|| {
-                    "buck2 must be installed. The LSP is bundled with the buck2 cli.".to_string()
-                })?;
+                let binary_settings = LspSettings::for_worktree("buck2-lsp", worktree)
+                    .ok()
+                    .and_then(|lsp_settings| lsp_settings.binary);
+                let binary_args = binary_settings
+                    .as_ref()
+                    .and_then(|binary_settings| binary_settings.arguments.clone())
+                    .unwrap_or_else(|| vec!["lsp".to_string()]);
+                let path = binary_settings
+                    .as_ref()
+                    .and_then(|settings| settings.path.clone().map(|path| Ok(path)))
+                    .unwrap_or_else(|| {
+                        worktree.which("buck2").ok_or_else(|| {
+                            "buck2 must be installed. The LSP is bundled with the buck2 cli."
+                                .to_string()
+                        })
+                    })?;
                 Ok(zed::Command {
                     command: path,
-                    args: vec!["lsp".to_string()],
+                    args: binary_args,
                     env: Default::default(),
                 })
             }
             "tilt" => {
-                let path = worktree.which("tilt").ok_or_else(|| {
-                    "`tilt` must be installed. The LSP is bundled with the tilt cli.".to_string()
-                })?;
-
+                let binary_settings = LspSettings::for_worktree("tilt", worktree)
+                    .ok()
+                    .and_then(|lsp_settings| lsp_settings.binary);
+                let binary_args = binary_settings
+                    .as_ref()
+                    .and_then(|binary_settings| binary_settings.arguments.clone())
+                    .unwrap_or_else(|| vec!["lsp".to_string(), "start".to_string()]);
+                let path = binary_settings
+                    .as_ref()
+                    .and_then(|settings| settings.path.clone().map(|path| Ok(path)))
+                    .unwrap_or_else(|| {
+                        worktree.which("tilt").ok_or_else(|| {
+                            "`tilt` must be installed. The LSP is bundled with the tilt cli."
+                                .to_string()
+                        })
+                    })?;
                 Ok(zed::Command {
                     command: path,
-                    args: vec!["lsp".to_string(), "start".to_string()],
+                    args: binary_args,
                     env: Default::default(),
                 })
             }
